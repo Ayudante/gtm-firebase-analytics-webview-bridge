@@ -1,8 +1,5 @@
 homepage: "https://ayudante.jp/"
 documentation: "https://github.com/Ayudante/gtm-firebase-analytics-webview-bridge#readme"
 versions:
-  # TODO: 公開したい template.tpl を含むコミットの full SHA (40桁) に置き換えてから
-  #       この metadata.yaml をコミットする（sha は template.tpl のコミット、
-  #       metadata.yaml の更新はその後の別コミットになる）
-  - sha: REPLACE_WITH_FULL_COMMIT_SHA
+  - sha: c6de32b762d2b8750e8adfd8ffbc89b85fb2a8fc
     changeNotes: Initial release.
