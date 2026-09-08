@@ -302,11 +302,11 @@ ___TEMPLATE_PARAMETERS___
         "selectItems": [],
         "simpleValueType": true,
         "help": {
-          "text": "Select a GTM variable that returns an array of item objects, such as a Data Layer Variable that reads \"ecommerce.items\". Sent as the \"items\" parameter (required for ecommerce events such as \"purchase\").",
+          "text": "Select a GTM variable that returns an array of item objects, such as a Data Layer Variable that reads \"ecommerce.items\". Sent as the \"items\" parameter (required for ecommerce events such as \"purchase\"). Note: the sample native interface in the Firebase documentation cannot process the items array as-is. <a href=\"https://github.com/Ayudante/gtm-firebase-analytics-webview-bridge/blob/main/README.md#native-interface-customization-for-items\">Required native interface customization</a>",
           "translations": [
             {
               "locale": "ja",
-              "text": "アイテムオブジェクトの配列を返す GTM 変数を選択します（例: \"ecommerce.items\" を参照する「データレイヤーの変数」）。\"items\" パラメータとして送信されます（\"purchase\" などの e コマースイベントに必要です）。"
+              "text": "アイテムオブジェクトの配列を返す GTM 変数を選択します（例: \"ecommerce.items\" を参照する「データレイヤーの変数」）。\"items\" パラメータとして送信されます（\"purchase\" などの e コマースイベントに必要です）。注意: Firebase 公式ドキュメントのサンプル実装のままでは、ネイティブインターフェースが items 配列を処理できません。<a href=\"https://github.com/Ayudante/gtm-firebase-analytics-webview-bridge/blob/main/README.ja.md#items-を使用するためのネイティブインターフェース-カスタマイズ\">必要なカスタマイズ</a>"
             }
           ]
         },
