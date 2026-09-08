@@ -218,6 +218,7 @@ Event parameter and user property values are checked at runtime before being sen
 - If the Android interface is not found, the iOS interface is used
 - If neither interface is found, the tag does nothing
 - Values exceeding the character limits are truncated at runtime
+- If the event name is blank and there are no user properties to send, the tag fails as a misconfiguration (visible in preview mode)
 
 ## Recommended Setup 1: Preventing Data from Being Sent to Unintended GA4 Properties
 

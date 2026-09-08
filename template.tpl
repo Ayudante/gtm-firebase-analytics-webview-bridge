@@ -67,11 +67,11 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "help": {
-      "text": "Specify the name of the event. Must start with a letter. Only letters, numbers, and underscores allowed (no spaces). Max 40 characters. \u003ca href\u003d\"https://support.google.com/analytics/answer/13316687\"\u003eEvent naming rules\u003c/a\u003e",
+      "text": "Specify the name of the event. Must start with a letter. Only letters, numbers, and underscores allowed (no spaces). Max 40 characters. Must not start with \"_\", \"firebase_\", \"ga_\", \"google_\", or \"gtag.\". Leave blank to log no event and send user properties only. \u003ca href\u003d\"https://support.google.com/analytics/answer/13316687\"\u003eEvent naming rules\u003c/a\u003e",
       "translations": [
         {
           "locale": "ja",
-          "text": "イベント名を指定します。英字で始まり、英字・数字・アンダースコアのみ使用できます（スペース不可）。最大40文字。 \u003ca href\u003d\"https://support.google.com/analytics/answer/13316687\"\u003eイベント命名規則\u003c/a\u003e"
+          "text": "イベント名を指定します。英字で始まり、英字・数字・アンダースコアのみ使用できます（スペース不可）。最大40文字。\"_\"・\"firebase_\"・\"ga_\"・\"google_\"・\"gtag.\" で始まる名前は使用できません。空欄にするとイベントは記録せず、ユーザープロパティのみ送信します。 \u003ca href\u003d\"https://support.google.com/analytics/answer/13316687\"\u003eイベント命名規則\u003c/a\u003e"
         }
       ]
     }
@@ -107,11 +107,11 @@ ___TEMPLATE_PARAMETERS___
     "selectItems": [],
     "simpleValueType": true,
     "help": {
-      "text": "Select a Google Tag Settings variable to load shared event parameters and user properties. If the same parameter or user property name is set both here and in the variable, the value configured in this tag takes precedence.",
+      "text": "Select a Google Tag Settings variable to load shared event parameters and user properties. If the same parameter or user property name is set both here and in the variable, the value configured in this tag takes precedence. \"user_properties\" in the variable is applied as user properties. Web-only gtag config parameters (cookie settings etc.) are not forwarded to Firebase.",
       "translations": [
         {
           "locale": "ja",
-          "text": "「Google タグ: 設定」変数を選択すると、共通のイベントパラメータとユーザープロパティを読み込みます。このタグ内で直接設定したパラメータ・ユーザープロパティと変数の値が同じ名前の場合は、このタグ内の設定が優先されます。"
+          "text": "「Google タグ: 設定」変数を選択すると、共通のイベントパラメータとユーザープロパティを読み込みます。このタグ内で直接設定したパラメータ・ユーザープロパティと変数の値が同じ名前の場合は、このタグ内の設定が優先されます。変数内の \"user_properties\" はユーザープロパティとして設定されます。Web 専用の gtag 設定パラメータ（Cookie 設定など）は Firebase へ転送されません。"
         }
       ]
     },
@@ -302,11 +302,11 @@ ___TEMPLATE_PARAMETERS___
         "selectItems": [],
         "simpleValueType": true,
         "help": {
-          "text": "Select a GTM variable that returns an array of item objects (e.g. <code>{{DL - ecommerce.items}}</code>). Sent as the <code>items</code> parameter.",
+          "text": "Select a GTM variable that returns an array of item objects, such as a Data Layer Variable that reads \"ecommerce.items\". Sent as the \"items\" parameter (required for ecommerce events such as \"purchase\").",
           "translations": [
             {
               "locale": "ja",
-              "text": "アイテムオブジェクトの配列を返す GTM 変数を選択します（例：<code>{{DL - ecommerce.items}}</code>）。<code>items</code> パラメータとして送信されます。"
+              "text": "アイテムオブジェクトの配列を返す GTM 変数を選択します（例: \"ecommerce.items\" を参照する「データレイヤーの変数」）。\"items\" パラメータとして送信されます（\"purchase\" などの e コマースイベントに必要です）。"
             }
           ]
         },
@@ -683,6 +683,13 @@ if (hasUserProps) {
   } else {
     logToConsole('[FA WebView Bridge] No setUserProperty native APIs found.');
   }
+}
+
+// Nothing to send: no event name and no user properties resolved from any
+// source. Fail the tag so the misconfiguration is visible in preview mode.
+if (!data.eventName && !hasUserProps) {
+  logToConsole('[FA WebView Bridge] Nothing to send: set an event name or at least one user property.');
+  return data.gtmOnFailure();
 }
 
 data.gtmOnSuccess();
@@ -1504,6 +1511,25 @@ scenarios:
       'premium'
     );
     assertApi('gtmOnSuccess').wasCalled();
+
+- name: 'Fail tag when event name is empty and no user properties'
+  code: |-
+    const mockData = {
+      eventName: '',
+      userProperties: []
+    };
+
+    mock('copyFromWindow', function(key) {
+      if (key === 'AnalyticsWebInterface.logEvent') return function() {};
+      if (key === 'AnalyticsWebInterface.setUserProperty') return function() {};
+      return undefined;
+    });
+
+    runCode(mockData);
+
+    assertApi('callInWindow').wasNotCalled();
+    assertApi('gtmOnFailure').wasCalled();
+    assertApi('gtmOnSuccess').wasNotCalled();
 
 - name: 'Convert number to string in user property (Android)'
   code: |-
