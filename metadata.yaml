@@ -1,5 +1,5 @@
 homepage: "https://ayudante.jp/"
 documentation: "https://github.com/Ayudante/gtm-firebase-analytics-webview-bridge#readme"
 versions:
-  - sha: c6de32b762d2b8750e8adfd8ffbc89b85fb2a8fc
+  - sha: 72d88d7fd42960b8dd74d5c935740290d9e9a8f8
     changeNotes: Initial release.
