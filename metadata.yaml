@@ -1,7 +1,7 @@
 homepage: "https://ayudante.jp/"
 documentation: "https://github.com/Ayudante/gtm-firebase-analytics-webview-bridge#readme"
 versions:
-  - sha: 87b583f6f4c56781eee5a31d5debc5918adfac50
+  - sha: 2bb3bdb3051a769b59d7362edbb443de6a32cd81
     changeNotes: |-
       Improve field help texts (event name rules, settings variable behavior,
       items example). Fail the tag when there is no event name and no user
