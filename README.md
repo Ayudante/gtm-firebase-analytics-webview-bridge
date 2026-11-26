@@ -28,7 +28,7 @@ The template is available from the Community Template Gallery.
 
 1. In your GTM Web container, open **Templates**
 2. In the Tag Templates section, click **Search Gallery**
-3. Search for "Firebase Analytics WebView Bridge" and select it
+3. Search for "Firebase Analytics WebView Bridge by Ayudante" and select it
 4. Click **Add to workspace**
 
 ## Configuration

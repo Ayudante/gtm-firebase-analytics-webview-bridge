@@ -28,7 +28,7 @@
 
 1. GTM の Web コンテナで **テンプレート** を開きます
 2. タグテンプレートの **検索ギャラリー** をクリックします
-3. 「Firebase Analytics WebView Bridge」を検索して選択します
+3. 「Firebase Analytics WebView Bridge by Ayudante」を検索して選択します
 4. **ワークスペースに追加** をクリックします
 
 ## 設定

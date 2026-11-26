@@ -12,7 +12,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Firebase Analytics WebView Bridge",
+  "displayName": "Firebase Analytics WebView Bridge by Ayudante",
   "brand": {
     "id": "brand_dummy",
     "displayName": "Ayudante,inc."
