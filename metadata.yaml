@@ -1,6 +1,10 @@
 homepage: "https://ayudante.jp/"
 documentation: "https://github.com/Ayudante/gtm-firebase-analytics-webview-bridge#readme"
 versions:
+  - sha: 4f9ec38371f542fc6c40c730225d8a260822a0d5
+    changeNotes: |-
+      Rename the template to "Firebase Analytics WebView Bridge by Ayudante"
+      to clarify ownership, per gallery review feedback.
   - sha: 2bb3bdb3051a769b59d7362edbb443de6a32cd81
     changeNotes: |-
       Improve field help texts (event name rules, settings variable behavior,
